@@ -1,17 +1,16 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Contracts
 {
     public interface ICommentRepository
     {
-        List<Comment> GetAll();
-        List<Comment> GetActived(int newsId);
-        List<Comment> GetNonActived(int newsId);
+        IQueryable<Comment> GetAll();
         Comment GetById(int commentId);
-        void Add(int newsId,Comment comment);
+        Comment AddComment(News news, Comment comment);
         void Update(int commentId, Comment comment);
         void Delete(int commentId);
 

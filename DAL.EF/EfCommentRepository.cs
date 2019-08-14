@@ -7,25 +7,20 @@ using System.Text;
 
 namespace DAL.EF
 {
-    public class CommentRepository : ICommentRepository
+    public class EFCommentRepository : ICommentRepository
     {
         private readonly CommentContext Context;
 
-        public CommentRepository(CommentContext commentContext)
+        public EFCommentRepository(CommentContext commentContext)
         {
             Context = commentContext;
         }
         
-        public void Add(int newsId, Comment comment)
+        public Comment AddComment(News news,Comment comment)
         {
-            Context.Comments.Add(comment);
-            News news = new News
-            {
-                CommentId=comment.CommentId,
-                NewsId=newsId
-            };
-            Context.News.Add(news);
+            news.Comments.Add(comment);
             Context.SaveChanges();
+            return comment;
       
         }
 
@@ -33,20 +28,16 @@ namespace DAL.EF
         {
             
             Context.Comments.Remove(GetById(commentId));
-            var a = Context.News.Find(GetById(commentId));
-            Context.News.Remove(a);
+           // List<News> n=Context.News.Where(c => c.CommentId == commentId).ToList();
+            //var a = Context.News.Find(GetById(commentId));
+           // Context.News.Remove();
+            Context.SaveChanges();
 
 
         }
-
-        public List<Comment> GetActived(int newsId)
+        public IQueryable<Comment> GetAll()
         {
-            return Context.Comments.Where(c => c.Status == true).ToList();
-        }
-
-        public List<Comment> GetAll()
-        {
-            return Context.Comments.ToList();
+            return Context.Comments;
         }
 
         public Comment GetById(int commentId)
@@ -54,10 +45,10 @@ namespace DAL.EF
            return Context.Comments.Find(commentId);
         }
 
-        public List<Comment> GetNonActived(int newsId)
-        {
-            return Context.Comments.Where(c => c.Status == false).ToList();
-        }
+        //public List<Comment> GetNonActived(int newsId)
+        //{
+        //    return Context.Comments.Where(c => c.Status == false).ToList();
+        //}
 
         public void Update(int commentId, Comment comment)
         {

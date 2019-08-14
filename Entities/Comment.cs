@@ -12,5 +12,6 @@ namespace Entities
         public string Text { get; set; }
         public DateTime Date { get; set; }
         public bool Status { get; set; }
+
     }
 }

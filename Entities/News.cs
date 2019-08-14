@@ -7,7 +7,7 @@ namespace Entities
     public class News
     {
         public int NewsId { get; set; }
-        public int CommentId { get; set; }
+        public string NewsAppRef { get; set; }
         public List<Comment> Comments { get; set; }
 
     }
