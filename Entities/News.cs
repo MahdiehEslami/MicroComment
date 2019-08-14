@@ -8,7 +8,7 @@ namespace Entities
     {
         public int NewsId { get; set; }
         public int CommentId { get; set; }
-        public List<Comment> MyProperty { get; set; }
+        public List<Comment> Comments { get; set; }
 
     }
 }

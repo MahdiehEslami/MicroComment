@@ -11,8 +11,8 @@ namespace Contracts
         List<Comment> GetActived(int newsId);
         List<Comment> GetNonActived(int newsId);
         Comment GetById(int commentId);
-        Comment Add(Comment comment);
-        Comment Update(int commentId, Comment comment);
+        void Add(int newsId,Comment comment);
+        void Update(int commentId, Comment comment);
         void Delete(int commentId);
 
 
